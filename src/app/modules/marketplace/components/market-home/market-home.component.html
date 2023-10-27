@@ -1,0 +1,24 @@
+<section id="buscador">
+    <div class="container">
+      <h1 class="products__title">Lista de productos</h1>
+      <form class="products__search">
+        <label>Busqueda: </label>
+        <input type="text" name="" id="" (keyup)="searchByText($event)" >
+      </form>
+    </div>
+  </section>
+
+  <section id="products">
+    <div class="slider">
+      <div class="slides">
+      <div *ngFor="let producto of productos">
+        <div class="rows-container">
+          <h3>{{ producto.title }}</h3>
+          <p>${{ producto.price }}</p>
+          <button (click)="addProductToCart(producto)" id="btn-product" class="row">AGREGAR</button>
+          <img alt="" src="{{ producto.image }}">
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
