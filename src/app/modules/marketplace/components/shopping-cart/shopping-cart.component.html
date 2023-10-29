@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <div class="container" *ngFor="let producto of productosCompra">
+    <div class="h-100 w-100 rows-container">
+      <a
+        class="btn btn-danger position-relative top-0 end-0 mt-2 me-2"
+        href="#"
+        role="button"
+        (click)="removeFromShoppingCart(producto)"
+      >
+        QUITAR
+      </a>
+      <h3>{{ producto.title }}</h3>
+      <p>Price: ${{ producto.price }}</p>
+      <img alt="" src="{{ producto.image }}" />
+    </div>
+  </div>
+  <span *ngIf="productosCompra.length == 0"
+    >No se han agregado productos al Carrito de Compras</span
+  >
+</div>

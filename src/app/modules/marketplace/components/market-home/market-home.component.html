@@ -1,24 +1,41 @@
-<section id="buscador">
-    <div class="container">
-      <h1 class="products__title">Lista de productos</h1>
-      <form class="products__search">
-        <label>Busqueda: </label>
-        <input type="text" name="" id="" (keyup)="searchByText($event)" >
-      </form>
+<div class="container-fluid">
+  <section id="buscador">
+    <div class="container-fluid">
+      <h1 class="fs-1 text-center">Marketplace</h1>
+      <a
+        class="btn btn-success position-absolute top-0 end-0 mt-2 me-2"
+        href="#"
+        role="button"
+        (click)="showShoppingCart()"
+      >
+        Carrito de Compras
+      </a>
+      <div
+        *ngIf="isShoppingCartVisible"
+        class="container-fluid border border-success-subtle"
+        id="collapse-shopping-cart"
+      >
+        <app-shopping-cart></app-shopping-cart>
+      </div>
+      <br />
+      <br />
+      <div class="d-flex justify-content-end">
+        <label for="search" class="form-label p-1 fs-4">Buscar: </label>
+        <input
+          class="form-control w-25"
+          type="text"
+          name="search"
+          id="search"
+          (keyup)="searchByText($event)"
+        />
+      </div>
+      <br />
     </div>
   </section>
 
   <section id="products">
-    <div class="slider">
-      <div class="slides">
-      <div *ngFor="let producto of productos">
-        <div class="rows-container">
-          <h3>{{ producto.title }}</h3>
-          <p>${{ producto.price }}</p>
-          <button (click)="addProductToCart(producto)" id="btn-product" class="row">AGREGAR</button>
-          <img alt="" src="{{ producto.image }}">
-        </div>
-      </div>
-    </div>
+    <div class="slider border border-primary-subtle mt2">
+      <app-products></app-products>
     </div>
   </section>
+</div>

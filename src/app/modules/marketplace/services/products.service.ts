@@ -6,7 +6,11 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class MarketplaceService {
+export class ProductsService {
   private apiUrl: string = `${environment.apiFakeStoreApiUrl}`;
   constructor(private http: HttpClient) {}
+
+  getProductos(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/products`);
+  }
 }
