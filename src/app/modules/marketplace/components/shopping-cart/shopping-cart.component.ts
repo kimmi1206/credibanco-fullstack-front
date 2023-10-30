@@ -1,8 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Producto } from '../../models/producto';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 import { Subscription } from 'rxjs';
-import { EventsEnum } from '../../enums/events';
+import { EnumTypes } from '../../enums/events';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -12,6 +18,9 @@ import { EventsEnum } from '../../enums/events';
 export class ShoppingCartComponent implements OnInit, OnDestroy {
   productosCompra: Producto[] = [];
 
+  @Output() transmittedMessage: EventEmitter<string> = new EventEmitter();
+  @Output() paymentEvent: EventEmitter<string> = new EventEmitter();
+
   private subscription: Subscription = new Subscription();
 
   constructor(private shoppingCartService: ShoppingCartService) {}
@@ -20,20 +29,25 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     this.getShoppingCart();
     this.subscription = this.shoppingCartService.notifyObservable$.subscribe(
       (message) => {
-        if (message == EventsEnum.ADDED.PRODUCT) this.getShoppingCart();
+        if (message == EnumTypes.PRODUCT.ADDED) this.getShoppingCart();
       }
     );
   }
 
   getShoppingCart() {
     this.productosCompra = this.shoppingCartService.getShoppingCartProducts();
-    console.log(this.productosCompra);
   }
 
   removeFromShoppingCart(producto: Producto) {
     if (this.shoppingCartService.removeFromShoppingCart(producto)) {
       this.getShoppingCart();
+      this.transmittedMessage.emit(EnumTypes.PRODUCT.REMOVED);
     }
+  }
+
+  startPaymentProcess() {
+    this.paymentEvent.emit('true');
+    this.transmittedMessage.emit(EnumTypes.PAYMENT.CREATED);
   }
 
   ngOnDestroy() {

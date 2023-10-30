@@ -1,10 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { Producto } from '../../models/producto';
 import { MarketplaceService } from '../../services/marketplace.service';
 import { ProductsService } from '../../services/products.service';
 import { ShoppingCartComponent } from '../shopping-cart/shopping-cart.component';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
-import { EventsEnum } from '../../enums/events';
+import { EnumTypes } from '../../enums/events';
 
 @Component({
   selector: 'app-products',
@@ -12,6 +18,8 @@ import { EventsEnum } from '../../enums/events';
   styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent implements OnInit {
+  @Output() transmittedMessage: EventEmitter<string> = new EventEmitter();
+
   productos: Producto[] = [];
   productosCache: Producto[] = [];
 
@@ -39,10 +47,10 @@ export class ProductsComponent implements OnInit {
   }
 
   addProductToCart(producto: Producto) {
-    if (producto) {
+    if (producto?.id) {
       if (!Object.hasOwn(producto, 'quantity')) producto.quantity = 1;
       this.shoppingCartService.addProductToShoppingCart(producto);
-      this.shoppingCartService.notifyUpdate(EventsEnum.ADDED.PRODUCT);
+      this.transmittedMessage.emit(EnumTypes.PRODUCT.ADDED);
     }
   }
 

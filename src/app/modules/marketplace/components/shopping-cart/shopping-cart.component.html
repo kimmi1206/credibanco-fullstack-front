@@ -1,20 +1,49 @@
-<div class="container-fluid">
-  <div class="container" *ngFor="let producto of productosCompra">
-    <div class="h-100 w-100 rows-container">
-      <a
-        class="btn btn-danger position-relative top-0 end-0 mt-2 me-2"
-        href="#"
-        role="button"
-        (click)="removeFromShoppingCart(producto)"
+<div>
+  <div *ngIf="productosCompra.length > 0; else noProducts">
+    <div class="container-fluid d-flex flex-row">
+      <button
+        type="button"
+        class="btn btn-success w-100"
+        (click)="startPaymentProcess()"
       >
-        QUITAR
-      </a>
-      <h3>{{ producto.title }}</h3>
-      <p>Price: ${{ producto.price }}</p>
-      <img alt="" src="{{ producto.image }}" />
+        PAGAR
+      </button>
+    </div>
+    <div class="container align-content-start overflow-x-scroll h-100">
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div *ngFor="let producto of productosCompra" class="col p-4">
+          <div class="card">
+            <span
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+            >
+              {{ producto.quantity }}
+            </span>
+            <img
+              class="card-img-top"
+              alt="..."
+              src="{{ producto.image }}"
+              style="max-height: 12rem"
+            />
+            <div class="card-body">
+              <h5 class="card-title text-center">{{ producto.title }}</h5>
+            </div>
+            <div class="card-footer text-body-success">
+              Price: ${{ producto.price }}
+            </div>
+            <a
+              class="btn btn-danger position-relative start-0"
+              href="#"
+              role="button"
+              (click)="removeFromShoppingCart(producto)"
+            >
+              REMOVER
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <span *ngIf="productosCompra.length == 0"
-    >No se han agregado productos al Carrito de Compras</span
-  >
+  <ng-template #noProducts>
+    <span>No se han agregado productos al Carrito de Compras</span>
+  </ng-template>
 </div>

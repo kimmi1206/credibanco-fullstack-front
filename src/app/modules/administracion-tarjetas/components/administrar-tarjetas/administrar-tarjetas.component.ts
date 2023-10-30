@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./administrar-tarjetas.component.css'],
 })
 export class AdministrarTarjetasComponent implements OnInit {
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+  constructor() {}
+  ngOnInit(): void {}
 }

@@ -6,7 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recargar-tarjeta.component.css'],
 })
 export class RecargarTarjetaComponent implements OnInit {
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
+  saldo: number = 0.0;
+  constructor() {}
+  ngOnInit(): void {}
+
+  recargarSaldo() {
+    console.log('Recarga realizada de ', this.saldo);
   }
 }

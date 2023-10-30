@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable, Subject } from 'rxjs';
 import { Producto } from '../models/producto';
+import { EnumTypes } from '../enums/events';
 
 @Injectable({
   providedIn: 'root',
@@ -38,6 +39,7 @@ export class ShoppingCartService {
         }
       }
       ShoppingCartService.productosShoppingCart.set(producto.id, producto);
+      this.notifyUpdate(EnumTypes.PRODUCT.ADDED);
     }
   }
 
@@ -52,7 +54,6 @@ export class ShoppingCartService {
       } else {
         ShoppingCartService.productosShoppingCart.delete(producto.id);
       }
-      console.log(ShoppingCartService.productosShoppingCart);
       return true;
     }
     return false;

@@ -1,12 +1,32 @@
 <div class="container-fluid">
-  <section id="buscador">
+  <section
+    class="position-absolute top-0 start-0 z-1"
+    *ngIf="messages.length > 0"
+    id="messages"
+  >
+    <div
+      *ngFor="let message of messages"
+      class="alert alert-success alert-dismissible d-flex align-items-center fade show"
+      role="alert"
+    >
+      <div>{{ message }}!</div>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    </div>
+  </section>
+
+  <section id="cabecera">
     <div class="container-fluid">
       <h1 class="fs-1 text-center">Marketplace</h1>
       <a
         class="btn btn-success position-absolute top-0 end-0 mt-2 me-2"
         href="#"
         role="button"
-        (click)="showShoppingCart()"
+        (click)="toggleShoppingCart()"
       >
         Carrito de Compras
       </a>
@@ -15,27 +35,39 @@
         class="container-fluid border border-success-subtle"
         id="collapse-shopping-cart"
       >
-        <app-shopping-cart></app-shopping-cart>
-      </div>
-      <br />
-      <br />
-      <div class="d-flex justify-content-end">
-        <label for="search" class="form-label p-1 fs-4">Buscar: </label>
-        <input
-          class="form-control w-25"
-          type="text"
-          name="search"
-          id="search"
-          (keyup)="searchByText($event)"
-        />
+        <div *ngIf="!isPaymentProcess; else paymentForm">
+          <app-shopping-cart
+            (paymentEvent)="showPaymentForm($event)"
+            (transmittedMessage)="showToast($event)"
+          ></app-shopping-cart>
+        </div>
+        <<ng-template #paymentForm>
+          <div>
+            <app-payment
+              (paymentEvent)="showPaymentForm($event)"
+              (transmittedMessage)="showToast($event)"
+            ></app-payment>
+          </div>
+        </ng-template>
       </div>
       <br />
     </div>
   </section>
 
-  <section id="products">
+  <section *ngIf="!isPaymentProcess" id="products">
+    <div class="d-flex justify-content-end">
+      <label for="search" class="form-label p-1 fs-4">Buscar: </label>
+      <input
+        class="form-control w-25"
+        type="text"
+        name="search"
+        id="search"
+        (keyup)="searchByText($event)"
+      />
+    </div>
+    <br />
     <div class="slider border border-primary-subtle mt2">
-      <app-products></app-products>
+      <app-products (transmittedMessage)="showToast($event)"></app-products>
     </div>
   </section>
 </div>

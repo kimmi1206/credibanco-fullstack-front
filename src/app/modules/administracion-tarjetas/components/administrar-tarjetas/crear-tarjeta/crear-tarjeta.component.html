@@ -1,57 +1,111 @@
-<form class="credit-card">
-    <div class="form-header">
-      <h4 class="title">Credit card detail</h4>
-    </div>
-   
-    <div class="form-body">
-      <!-- Card Number -->
-      <input type="text" class="card-number" placeholder="Card Number">
-   
-      <!-- Date Field -->
-      <div class="date-field">
-        <div class="month">
-          <select name="Month">
-            <option value="january">January</option>
-            <option value="february">February</option>
-            <option value="march">March</option>
-            <option value="april">April</option>
-            <option value="may">May</option>
-            <option value="june">June</option>
-            <option value="july">July</option>
-            <option value="august">August</option>
-            <option value="september">September</option>
-            <option value="october">October</option>
-            <option value="november">November</option>
-            <option value="december">December</option>
-          </select>
+<div class="container-fluid">
+  <ng-template #crearTarjetaForm>
+    <form>
+      <div class="mb-3 row">
+        <label for="numeroTarjeta" class="col-sm-2 col-form-label"
+          >Numero Tarjeta</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="number"
+            readonly
+            disabled
+            class="form-control"
+            id="numeroTarjeta"
+            name="numeroTarjeta"
+            [(ngModel)]="numeroTarjeta"
+          />
         </div>
-        <div class="year">
-          <select name="Year">
-            <option value="2016">2016</option>
-            <option value="2017">2017</option>
-            <option value="2018">2018</option>
-            <option value="2019">2019</option>
-            <option value="2020">2020</option>
-            <option value="2021">2021</option>
-            <option value="2022">2022</option>
-            <option value="2023">2023</option>
-            <option value="2024">2024</option>
+      </div>
+
+      <div class="mb-3 row">
+        <label for="titularCuenta" class="col-sm-2 col-form-label"
+          >Titular Cuenta</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            id="titularCuenta"
+            name="titularCuenta"
+            [(ngModel)]="titularCuenta"
+          />
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label for="fechaVencimiento" class="col-sm-2 col-form-label"
+          >Fecha Vencimiento</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            readonly
+            disabled
+            class="form-control"
+            id="fechaVencimiento"
+            name="fechaVencimiento"
+            [(ngModel)]="fechaVencimiento"
+            value="{{ fechaVencimiento | date : 'MM/YYYY' }}"
+          />
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label for="tipoTarjeta" class="col-sm-2 col-form-label"
+          >Tipo Tarjeta</label
+        >
+        <div class="col-sm-10">
+          <select
+            class="form-select"
+            id="tipoTarjeta"
+            name="tipoTarjeta"
+            [(ngModel)]="tipoTarjeta"
+            aria-label="Default select example"
+          >
+            <option value="1">CREDITO</option>
+            <option value="2">DEBITO</option>
           </select>
         </div>
       </div>
-   
-      <!-- Card Verification Field -->
-      <div class="card-verification">
-        <div class="cvv-input">
-          <input type="text" placeholder="CVV">
-        </div>
-        <div class="cvv-details">
-          <p>3 or 4 digits usually found <br> on the signature strip</p>
+
+      <div class="mb-3 row">
+        <label for="saldo" class="col-sm-2 col-form-label">Saldo</label>
+        <div class="col-sm-10">
+          <input
+            type="number"
+            readonly
+            disabled
+            class="form-control"
+            id="saldo"
+            name="saldo"
+            placeholder="USD $0.0"
+            [(ngModel)]="saldo"
+            value="{{ saldo | currency : 'USD' }}"
+          />
         </div>
       </div>
-   
-      <!-- Buttons -->
-      <button type="submit" class="proceed-btn"><a href="#">Proceed</a></button>
-      <button type="submit" class="paypal-btn"><a href="#">Pay With</a></button>
-    </div>
-  </form>
+
+      <div class="container-fluid d-flex gap-3">
+        <button
+          type="submit"
+          (click)="crearTarjeta()"
+          class="btn btn-primary p-2"
+        >
+          CREAR
+        </button>
+        <button
+          type="button"
+          (click)="showRecargarForm()"
+          class="btn btn-primary p-2"
+        >
+          RECARGAR
+        </button>
+      </div>
+    </form>
+  </ng-template>
+
+  <div *ngIf="isRecarga; else crearTarjetaForm">
+    <app-recargar-tarjeta></app-recargar-tarjeta>
+  </div>
+</div>

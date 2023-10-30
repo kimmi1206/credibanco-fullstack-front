@@ -1,11 +1,13 @@
-const EnumTypes = Object.freeze({
-  PRODUCT: 'Product',
-  CARD: 'Card',
+const EnumEvents = Object.freeze({
+  ADDED: 'Agregado',
+  REMOVED: 'Removido',
+  UPDATED: 'Actualizado',
+  CREATED: 'Creado',
+  COMPLETED: 'Completado',
 });
 
-export const EventsEnum = Object.freeze({
-  ADDED: EnumTypes,
-  REMOVED: EnumTypes,
-  UPDATED: EnumTypes,
-  CREATED: EnumTypes,
+export const EnumTypes = Object.freeze({
+  PRODUCT: EnumEvents,
+  CARD: EnumEvents,
+  PAYMENT: EnumEvents,
 });

@@ -1,45 +1,58 @@
 <div class="slides">
-  <div class="container" *ngFor="let producto of productos">
-    <div class="h-100 w-100 rows-container">
-      <h3>{{ producto.title }}</h3>
-      <p>Price: ${{ producto.price }}</p>
-      <div class="dropdown">
-        <a
-          class="btn btn-secondary dropdown-toggle position-absolute top-0 start-50"
-          href="#"
-          role="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-list"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
-            />
-          </svg>
-        </a>
-
-        <ul class="dropdown-menu">
-          <li>
+  <div class="container-fluid" *ngFor="let producto of productos">
+    <div class="w-100 rows-container row row-cols-1 row-cols-md-3 g-4">
+      <div class="col">
+        <div class="card border-secondary h-100" style="width: 15rem">
+          <div class="dropdown">
             <a
-              class="dropdown-item active"
+              class="btn btn-secondary dropdown-toggle position-absolute top-0 start-0 opacity-75"
               href="#"
               role="button"
-              (click)="addProductToCart(producto)"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
             >
-              AGREGAR
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-list"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
+                />
+              </svg>
             </a>
-          </li>
-        </ul>
+
+            <ul class="dropdown-menu">
+              <li>
+                <a
+                  class="dropdown-item active"
+                  href="#"
+                  role="button"
+                  (click)="addProductToCart(producto)"
+                >
+                  AGREGAR
+                </a>
+              </li>
+            </ul>
+          </div>
+          <img
+            class="card-img-top"
+            alt="..."
+            src="{{ producto.image }}"
+            style="max-height: 16rem"
+          />
+          <div class="card-body">
+            <h5 class="card-title text-center">{{ producto.title }}</h5>
+          </div>
+          <div class="card-footer text-center">
+            Price: ${{ producto.price }}
+          </div>
+        </div>
       </div>
-      <img alt="" src="{{ producto.image }}" />
     </div>
   </div>
 </div>

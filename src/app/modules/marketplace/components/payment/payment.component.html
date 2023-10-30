@@ -1,0 +1,47 @@
+<div>
+  <div>
+    <form [formGroup]="form">
+      <div class="mb-3 row">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+          id="nombre"
+          name="nombre"
+          formControlName="nombre"
+          aria-describedby="nombre"
+        />
+      </div>
+      <div class="mb-3 row">
+        <label for="tarjeta" class="form-label">Numero de Tarjeta</label>
+        <input
+          type="text"
+          name="tarjeta"
+          formControlName="tarjeta"
+          class="form-control"
+          id="tarjeta"
+        />
+      </div>
+      <div class="mb-3 row">
+        <label for="fechaVencimiento" class="form-label"
+          >Fecha de Vencimiento</label
+        >
+        <input
+          type="date"
+          class="form-control"
+          formControlName="fechaVencimiento"
+          name="fechaVencimiento"
+          id="fechaVencimiento"
+        />
+      </div>
+      <button
+        type="submit"
+        (click)="realizarPago()"
+        class="btn btn-success w-25"
+      >
+        PAGAR
+      </button>
+      <button type="submit" class="btn btn-danger w-25">CANCELAR</button>
+    </form>
+  </div>
+</div>
