@@ -34,6 +34,7 @@ import { MarketHomeComponent } from './modules/marketplace/components/market-hom
         component: AdministrarTarjetasComponent,
       },
       { path: '', component: MarketHomeComponent },
+      { path: '**', component: MarketHomeComponent },
     ]),
   ],
   providers: [],
