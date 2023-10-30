@@ -33,7 +33,12 @@ export class PaymentComponent implements OnInit {
       ],
       tarjeta: [
         '',
-        [Validators.required, Validators.minLength(16), this.cardValidator()],
+        [
+          Validators.required,
+          Validators.minLength(16),
+          Validators.maxLength(16),
+          this.cardValidator(),
+        ],
       ],
       fechaVencimiento: [
         '',

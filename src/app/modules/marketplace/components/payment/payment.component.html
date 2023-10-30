@@ -8,6 +8,7 @@
           class="form-control"
           id="nombre"
           name="nombre"
+          required
           formControlName="nombre"
           aria-describedby="nombre"
         />
@@ -19,6 +20,9 @@
           name="tarjeta"
           formControlName="tarjeta"
           class="form-control"
+          minlength="16"
+          maxlength="16"
+          required
           id="tarjeta"
         />
       </div>
@@ -29,6 +33,7 @@
         <input
           type="date"
           class="form-control"
+          required
           formControlName="fechaVencimiento"
           name="fechaVencimiento"
           id="fechaVencimiento"
